@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel/characters/details/characters_details_screen.dart';
-import 'package:flutter_marvel/models/characters_response.dart';
+import 'package:flutter_marvel/models/comics_response.dart';
 import 'package:flutter_marvel/network/network_image.dart';
 
-class CharactersListItem extends StatelessWidget {
-  CharactersListItem({this.result});
+class ComicsListItem extends StatelessWidget {
+  ComicsListItem({this.comic});
 
-  final Character result;
+  final Comic comic;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CharactersDetailsScreen(result)),
-          );
-        },
+        onTap: () {},
         child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.all(new Radius.circular(8.0)),
@@ -28,7 +22,7 @@ class CharactersListItem extends StatelessWidget {
                 Expanded(
                   child: Image(
                     image: NetworkImageWithRetry(
-                      result.thumbnail.path + "." + result.thumbnail.extension,
+                      comic.thumbnail.path + "." + comic.thumbnail.extension,
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -37,7 +31,7 @@ class CharactersListItem extends StatelessWidget {
                   height: 30,
                   child: Center(
                     child: Text(
-                      result.name,
+                      comic.title,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 13),
                     ),

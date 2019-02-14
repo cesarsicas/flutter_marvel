@@ -1,4 +1,4 @@
-class GetCharactersResponse {
+class CharactersResponse {
   int code;
   String status;
   String copyright;
@@ -7,7 +7,7 @@ class GetCharactersResponse {
   Data data;
   String etag;
 
-  GetCharactersResponse(
+  CharactersResponse(
       {this.code,
         this.status,
         this.copyright,
@@ -16,7 +16,7 @@ class GetCharactersResponse {
         this.data,
         this.etag});
 
-  GetCharactersResponse.fromJson(Map<String, dynamic> json) {
+  CharactersResponse.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     status = json['status'];
     copyright = json['copyright'];
@@ -46,7 +46,7 @@ class Data {
   int limit;
   int total;
   int count;
-  List<Results> results;
+  List<Character> results;
 
   Data({this.offset, this.limit, this.total, this.count, this.results});
 
@@ -56,9 +56,9 @@ class Data {
     total = json['total'];
     count = json['count'];
     if (json['results'] != null) {
-      results = new List<Results>();
+      results = new List<Character>();
       json['results'].forEach((v) {
-        results.add(new Results.fromJson(v));
+        results.add(new Character.fromJson(v));
       });
     }
   }
@@ -76,7 +76,7 @@ class Data {
   }
 }
 
-class Results {
+class Character {
   int id;
   String name;
   String description;
@@ -84,12 +84,12 @@ class Results {
   String resourceURI;
   List<Urls> urls;
   Thumbnail thumbnail;
-  Comics comics;
+  Comic comics;
   Stories stories;
   Events events;
   Series series;
 
-  Results(
+  Character(
       {this.id,
         this.name,
         this.description,
@@ -102,7 +102,7 @@ class Results {
         this.events,
         this.series});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
@@ -118,7 +118,7 @@ class Results {
         ? new Thumbnail.fromJson(json['thumbnail'])
         : null;
     comics =
-    json['comics'] != null ? new Comics.fromJson(json['comics']) : null;
+    json['comics'] != null ? new Comic.fromJson(json['comics']) : null;
     stories =
     json['stories'] != null ? new Stories.fromJson(json['stories']) : null;
     events =
@@ -194,15 +194,15 @@ class Thumbnail {
   }
 }
 
-class Comics {
+class Comic {
   int available;
   int returned;
   String collectionURI;
   List<Items> items;
 
-  Comics({this.available, this.returned, this.collectionURI, this.items});
+  Comic({this.available, this.returned, this.collectionURI, this.items});
 
-  Comics.fromJson(Map<String, dynamic> json) {
+  Comic.fromJson(Map<String, dynamic> json) {
     available = json['available'];
     returned = json['returned'];
     collectionURI = json['collectionURI'];

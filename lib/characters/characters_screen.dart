@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_marvel/characters/characters_list_item.dart';
 import 'package:flutter_marvel/characters/characters_presenter.dart';
 import 'package:flutter_marvel/characters/characters_view.dart';
-import 'package:flutter_marvel/models/GetCharactersResponse.dart';
+import 'package:flutter_marvel/models/characters_response.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class CharactersScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class CharactersScreen extends StatefulWidget {
 class _CharacterScreenState extends State<CharactersScreen>
     implements CharactersView {
   CharactersPresenter presenter;
-  var characters = new List<Results>();
+  var characters = new List<Character>();
   var _editTextController = TextEditingController();
   var isLoading = false;
   final ScrollController scrollController = new ScrollController();
@@ -95,7 +95,7 @@ class _CharacterScreenState extends State<CharactersScreen>
   }
 
   @override
-  addItems(List<Results> characters) {
+  addItems(List<Character> characters) {
     setState(() {
       this.characters.addAll(characters);
     });

@@ -4,6 +4,7 @@ import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:dio/dio.dart';
 import 'package:flutter_marvel/characters/characters_view.dart';
+import 'package:flutter_marvel/characters/details/characters_details_view.dart';
 import 'package:flutter_marvel/consts/Consts.dart';
 import 'package:flutter_marvel/models/characters_response.dart';
 
@@ -13,12 +14,11 @@ class CharactersPresenter {
   var offset = 0;
   var lastTotalReturnedItems = 0;
   var firstCall = true;
-  var searchTerm = "";
-  CharactersView view;
+  CharactersDetailsView view;
 
   CharactersPresenter(this.view);
 
-  void getCharacters() async {
+  void getCharacters(int characterId) async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     final hash = generateMd5(timestamp + Const.privateKey + Const.publicKey).toString();
 
@@ -29,12 +29,9 @@ class CharactersPresenter {
         "hash": hash,
         "ts": timestamp,
         "limit": itemsPerPage.toString(),
-        "offset": offset.toString()
-      };
-
-      if (this.searchTerm.isNotEmpty && searchTerm != null) {
-        queryParameters['nameStartsWith'] = searchTerm;
-      }
+        "offset": offset.toString(),
+        "characters": characterId.toString()
+    };
 
       if (!firstCall) {
         if (this.lastTotalReturnedItems < itemsPerPage) {
@@ -59,12 +56,6 @@ class CharactersPresenter {
     }
   }
 
-  void searchCharacters([String searchTerm = ""]) async {
-    refresh();
-    this.searchTerm = searchTerm;
-    getCharacters();
-  }
-
   generateMd5(String data) {
     var content = new Utf8Encoder().convert(data);
     var md5 = crypto.md5;
@@ -77,7 +68,6 @@ class CharactersPresenter {
     this.offset = 0;
     this.lastTotalReturnedItems = 0;
     this.firstCall = true;
-    this.searchTerm = "";
     view.clearList();
   }
 }
