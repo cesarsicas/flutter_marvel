@@ -85,7 +85,7 @@ class _CharactersDetailsScreenState extends State<CharactersDetailsScreen>
                         padding: EdgeInsets.only(top: 5.0),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                          crossAxisCount: 3,
                           childAspectRatio: 0.85,
                         ),
                         controller: scrollController,

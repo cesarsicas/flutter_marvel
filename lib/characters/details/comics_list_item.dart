@@ -12,32 +12,14 @@ class ComicsListItem extends StatelessWidget {
     return GestureDetector(
         onTap: () {},
         child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.all(new Radius.circular(8.0)),
+          color: Colors.white,
+          elevation: 5.0,
+          child: Image(
+            image: NetworkImageWithRetry(
+              comic.thumbnail.path + "." + comic.thumbnail.extension,
             ),
-            color: Colors.white,
-            elevation: 5.0,
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: Image(
-                    image: NetworkImageWithRetry(
-                      comic.thumbnail.path + "." + comic.thumbnail.extension,
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Container(
-                  height: 30,
-                  child: Center(
-                    child: Text(
-                      comic.title,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  ),
-                )
-              ],
-            )));
+            fit: BoxFit.cover,
+          ),
+        ));
   }
 }
