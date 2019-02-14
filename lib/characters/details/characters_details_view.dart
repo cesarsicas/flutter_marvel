@@ -1,7 +1,7 @@
-import 'package:flutter_marvel/models/characters_response.dart';
+import 'package:flutter_marvel/models/comics_response.dart';
 
 abstract class CharactersDetailsView {
-  addItems(List<Character> characters);
+  addItems(List<Comic> comics);
   showError();
   clearList();
   showLoading();

@@ -4,11 +4,13 @@ import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:dio/dio.dart';
 import 'package:flutter_marvel/characters/characters_view.dart';
-import 'package:flutter_marvel/consts/Consts.dart';
+import 'package:flutter_marvel/consts/consts.dart';
+import 'package:flutter_marvel/consts/keys.dart';
 import 'package:flutter_marvel/models/characters_response.dart';
 
 class CharactersPresenter {
   final itemsPerPage = 20;
+  final url = Const.baseUrl + "/v1/public/characters";
   var page = 0;
   var offset = 0;
   var lastTotalReturnedItems = 0;
@@ -20,12 +22,12 @@ class CharactersPresenter {
 
   void getCharacters() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    final hash = generateMd5(timestamp + Const.privateKey + Const.publicKey).toString();
+    final hash = generateMd5(timestamp + Keys.privateKey + Keys.publicKey).toString();
 
     try {
       offset = (page * itemsPerPage);
       Map<String, dynamic> queryParameters = {
-        "apikey": Const.publicKey,
+        "apikey": Keys.publicKey,
         "hash": hash,
         "ts": timestamp,
         "limit": itemsPerPage.toString(),
@@ -44,14 +46,14 @@ class CharactersPresenter {
 
       view.showLoading();
       firstCall = false;
-      var response = await Dio().get(Const.url, queryParameters: queryParameters);
+      var response = await Dio().get(url, queryParameters: queryParameters);
 
       final jsonValue = jsonDecode(response.toString());
       final object = CharactersResponse.fromJson(jsonValue);
-      print("Resultado " + object.data.results.length.toString());
+      print("Resultado " + object.data.characters.length.toString());
       this.lastTotalReturnedItems = object.data.count;
       page++;
-      view.addItems(object.data.results);
+      view.addItems(object.data.characters);
 
       view.hideLoading();
     } catch (e) {
