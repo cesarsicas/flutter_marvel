@@ -72,5 +72,5 @@ build/
 
 #keys
 
-**/lib/consts/keys.dart
+#**/lib/consts/keys.dart
 

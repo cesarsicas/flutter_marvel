@@ -4,7 +4,7 @@
 
 To test the app, you will need a PublicKey and PrivateKey from Marvel api  (https://developer.marvel.com/)
 
-Then, replace the string on file /lib/consts/Consts.dart
+Then, replace the strings on file /lib/consts/keys.dart
 
 
 All rights reserved to their respective owners.
