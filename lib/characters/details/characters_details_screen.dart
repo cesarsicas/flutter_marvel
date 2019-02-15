@@ -75,6 +75,15 @@ class _CharactersDetailsScreenState extends State<CharactersDetailsScreen>
                         style: TextStyle(fontSize: 14),
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0.0, 8, 0.0, 0.0),
+                      child: Center(
+                        child: Text(
+                          "Comics with this character",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -82,7 +91,7 @@ class _CharactersDetailsScreenState extends State<CharactersDetailsScreen>
                 child: NotificationListener(
                     onNotification: onNotification,
                     child: new GridView.builder(
-                        padding: EdgeInsets.only(top: 5.0),
+                        padding: EdgeInsets.fromLTRB(8,0,8,0),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
