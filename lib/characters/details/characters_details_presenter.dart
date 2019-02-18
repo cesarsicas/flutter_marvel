@@ -11,7 +11,7 @@ import 'package:flutter_marvel/models/characters_response.dart';
 import 'package:flutter_marvel/models/comics_response.dart';
 
 class CharactersDetailsPresenter {
-  final itemsPerPage = 20;
+  final itemsPerPage = 21;
   final url = Const.baseUrl + "/v1/public/comics";
   var page = 0;
   var offset = 0;

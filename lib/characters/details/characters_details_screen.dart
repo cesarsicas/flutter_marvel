@@ -56,24 +56,31 @@ class _CharactersDetailsScreenState extends State<CharactersDetailsScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Center(
-                      child: Image(
-                        image: NetworkImageWithRetry(
-                          character.thumbnail.path +
-                              "." +
-                              character.thumbnail.extension,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Image(
+                          image: NetworkImageWithRetry(
+                            character.thumbnail.path +
+                                "." +
+                                character.thumbnail.extension,
+                          ),
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
                         ),
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0.0, 8, 0.0, 0.0),
-                      child: Text(
-                        description,
-                        style: TextStyle(fontSize: 14),
-                      ),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(8,0,0,0),
+                            child: Text(
+                              description,
+                              overflow: TextOverflow.clip,
+                              softWrap: true,
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(0.0, 8, 0.0, 0.0),
@@ -91,7 +98,7 @@ class _CharactersDetailsScreenState extends State<CharactersDetailsScreen>
                 child: NotificationListener(
                     onNotification: onNotification,
                     child: new GridView.builder(
-                        padding: EdgeInsets.fromLTRB(8,0,8,0),
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
